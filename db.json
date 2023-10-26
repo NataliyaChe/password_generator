@@ -3,7 +3,12 @@
         { 
             "id": 1, 
             "resource": "meta", 
-            "password": "meta" 
+            "password": "meta1" 
+        },
+        { 
+            "id": 2, 
+            "resource": "telegram", 
+            "password": "telegram1" 
         }
     ]
   }

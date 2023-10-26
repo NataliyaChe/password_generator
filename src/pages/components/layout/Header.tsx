@@ -1,12 +1,10 @@
-// import Link from "next/link";
 import styles from '@/styles/Header.module.css'
 import { useRouter } from "next/router"
-import {Button, Box, Typography} from '@mui/material';
+import { Box, Typography} from '@mui/material';
 import Link from "../UI/Link";
 
 export default function Header() {
     const {pathname} = useRouter()
-    console.log('pathname', pathname);
     
     return (
         <Box sx={{
