@@ -2,8 +2,6 @@ import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead
 import { IAccountData } from '@/interfaces/accounts.interface';
 
 export default function AccountsTable({accounts}: IAccountData) {
-    console.log('accounts', accounts);
-    
       
     return (
         <TableContainer component={Paper} sx={{ width: 600 }}>

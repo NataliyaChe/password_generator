@@ -21,7 +21,7 @@ const theme = createTheme({
       active: '#FFDD00',
     },
     primary: {
-        main: '#228B22',
+        main: '#3C2D84',
       },
       secondary: {
         main: '#FFA500',
@@ -38,7 +38,7 @@ const theme = createTheme({
       fontWeight: 500,
     },
     button: {
-      fontStyle: 'italic',
+      fontWeight: 700,
     },
     body1: {
       fontSize: 25,
