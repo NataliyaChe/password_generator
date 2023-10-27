@@ -4,22 +4,27 @@ import Button from "./Button"
 import { useState } from 'react'
 import { IModal } from "@/interfaces/ui_component.interfaces"
 import { AccountService } from "@/services/accounts.service";
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 export default function Modal({open, onClose}: IModal) {
-    const [resource, setResource] = useState('');
-    const [password, setPassword] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    const [account, setAccount] = useState({
+        resource: "",
+        password: ""
+      })
 
     function addAccount() {
+        const {resource, password} = account
         if(resource && password) {
             AccountService.postNewAccount({resource, password})
             onClose()
         }
     }
 
-    function handleValue(event: React.ChangeEvent<HTMLInputElement>) {
-        event.target.id === "resource" ? setResource(event.target.value) : setPassword(event.target.value)   
+    function handleValue(event: React.ChangeEvent<HTMLInputElement>) {  
+        const value = event.target.value;
+        setAccount({
+            ...account,
+            [event.target.name]: value
+        });
     }
 
     return (
@@ -57,17 +62,17 @@ export default function Modal({open, onClose}: IModal) {
                     >
                         <TextField
                             required
-                            id="resource"
                             label="Resource"
                             onChange={handleValue}
-                            value={resource}
+                            name="resource"
+                            value={account.resource}
                         /> 
                         <TextField
                             required
-                            id="password"
                             label="Password"
                             onChange={handleValue}
-                            value={password}
+                            name="password"
+                            value={account.password}
                         /> 
                         <Button onClick={addAccount} >Add</Button>
                     </Box>
