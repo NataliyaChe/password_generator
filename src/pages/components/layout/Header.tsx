@@ -15,7 +15,7 @@ export default function Header() {
             flexDirection: 'column',
             gap: 2,
             alignItems: 'center',
-            color: 'text.secondary'
+            color: 'secondary.main'
         }}>
             <Typography variant="h1">Generate Your Password!</Typography>
             <div className={styles.nav}>

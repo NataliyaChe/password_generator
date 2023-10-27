@@ -11,21 +11,29 @@ const theme = createTheme({
   palette: {
     // mode: 'light',
     background: {
+      //Фон хедера
       paper: '#9370DB',
+     // Фон мейна
+      default: '#dad5f5'
     },
     text: {
+      // Dark text color
       primary: '#173A5E',
-      secondary: '#ffffff',
+      // placeholders
+      secondary: '#8F98E6',
     },
     action: {
+      // active link
       active: '#FFDD00',
     },
     primary: {
+      //Button bg
         main: '#3C2D84',
       },
-      secondary: {
-        main: '#FFA500',
-      },
+    secondary: {
+      //Modal bg, Table rows, header title,
+      main: '#FFFFFF',
+    },
   },
   typography: {
     fontFamily: roboto.style.fontFamily,

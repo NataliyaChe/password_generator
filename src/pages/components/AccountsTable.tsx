@@ -17,7 +17,7 @@ export default function AccountsTable({accounts}: IAccountData) {
                 {accounts.map((account) => (
                     <TableRow
                     key={account.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, bgcolor: 'text.secondary'}}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, bgcolor: 'secondary.main'}}
                     >
                         <TableCell >{account.id}</TableCell>
                         <TableCell component="th" scope="row">
