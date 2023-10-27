@@ -15,7 +15,6 @@ export default function AccountsPage({accounts}: IAccountData) {
         setShowModal(true)
     }
 
-
     return (
         <Layout>
             <Typography variant="h2" sx={{mb: 2}}>Account list:</Typography>
