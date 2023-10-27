@@ -6,19 +6,22 @@ import { IAccountData } from "@/interfaces/accounts.interface";
 import { AccountService } from "@/services/accounts.service";
 import Button from "./components/UI/Button";
 import Modal from "./components/UI/Modal";
+import {useState} from "react";
 
 export default function AccountsPage({accounts}: IAccountData) {
-    function addAccount(params:any) {
-        console.log('click');
-        
+    const [showModal, setShowModal] = useState(false);
+
+    function openModal() {
+        setShowModal(true)
     }
+
 
     return (
         <Layout>
             <Typography variant="h2" sx={{mb: 2}}>Account list:</Typography>
-            <Button onClick={addAccount}>+</Button>
+            <Button onClick={openModal}>+</Button>
             <AccountsTable accounts={accounts}/>
-            <Modal />
+            <Modal open={showModal} onClose={() => setShowModal(false)}/>
         </Layout>
     )
 }

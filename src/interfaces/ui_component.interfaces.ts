@@ -4,3 +4,8 @@ export interface ILink {
     color?: string,
     variant?: string
 }
+
+export interface IModal {
+    open: boolean,
+    onClose: any
+}
