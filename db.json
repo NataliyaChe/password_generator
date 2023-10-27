@@ -1,14 +1,19 @@
 {
-    "accounts": [
-        { 
-            "id": 1, 
-            "resource": "meta", 
-            "password": "meta1" 
-        },
-        { 
-            "id": 2, 
-            "resource": "telegram", 
-            "password": "telegram1" 
-        }
-    ]
-  }
+  "accounts": [
+    {
+      "resource": "meta",
+      "password": "meta1",
+      "id": 1
+    },
+    {
+      "resource": "telegram",
+      "password": "telegram1",
+      "id": 2
+    },
+    {
+      "resource": "sfsf",
+      "password": "sfsf",
+      "id": 3
+    }
+  ]
+}

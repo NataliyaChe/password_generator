@@ -2,14 +2,32 @@ import { Box, Typography, TextField } from "@mui/material";
 import MuiModal from "@mui/material/Modal"
 import Button from "./Button"
 import { useState } from 'react'
-import { IModal } from "@/interfaces/ui_component.interfaces";
+import { IModal } from "@/interfaces/ui_component.interfaces"
+import { AccountService } from "@/services/accounts.service";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 export default function Modal({open, onClose}: IModal) {
-    const [showModal, setShowModal] = useState(false);
-    // const handleClose = () => setOpen(false);
+    const [resource, setResource] = useState('');
+    const [password, setPassword] = useState('');
+    
+
     function addAccount() {
-        console.log('add');
-        setShowModal(false)
+        if(resource && password) {
+            AccountService.postNewAccount({resource, password})
+            // setShowModal(false)
+        }
+    }
+
+    function handleResurceValue(event: any) {
+        setResource(event.target.value)   
+    }
+
+    function handlePasswordValue(event: any) {
+        setPassword(event.target.value)
+    }
+
+    function handleValue(event: React.ChangeEvent<HTMLInputElement>) {
+        event.target.id === "resource" ? setResource(event.target.value) : setPassword(event.target.value)   
     }
 
     return (
@@ -47,13 +65,19 @@ export default function Modal({open, onClose}: IModal) {
                     >
                         <TextField
                             required
-                            id="account-input"
-                            label="Account"
+                            id="resource"
+                            label="Resource"
+                            // onChange={handleResurceValue}
+                            onChange={handleValue}
+                            value={resource}
                         /> 
                         <TextField
                             required
-                            id="password-input"
+                            id="password"
                             label="Password"
+                            // onChange={handlePasswordValue}
+                            onChange={handleValue}
+                            value={password}
                         /> 
                         <Button onClick={addAccount} >Add</Button>
                     </Box>
