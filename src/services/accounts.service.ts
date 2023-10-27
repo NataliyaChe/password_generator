@@ -16,8 +16,6 @@ export const AccountService = {
 
     async postNewAccount({resource, password}: INewAccount) {
         const {data} = await axios.post('/accounts', { resource, password })
-        console.log('data', data);
-        
         return data
     }
 }

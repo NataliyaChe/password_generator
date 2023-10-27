@@ -9,6 +9,11 @@
       "resource": "telegram",
       "password": "telegram1",
       "id": 2
+    },
+    {
+      "resource": "facebook",
+      "password": "facebook1",
+      "id": 3
     }
   ]
 }
