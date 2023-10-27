@@ -10,14 +10,13 @@ import {useState} from "react";
 
 export default function AccountsPage({accounts}: IAccountData) {
     const [showModal, setShowModal] = useState(false);
-    const tableAccounts = [
-        accounts
-    ]
-
-    console.log('tableAccounts', tableAccounts);
     
     function openModal() {
         setShowModal(true)
+    }
+
+    function closeModal() {
+        setShowModal(false)
     }
 
     return (
@@ -25,7 +24,9 @@ export default function AccountsPage({accounts}: IAccountData) {
             <Typography variant="h2" sx={{mb: 2}}>Accounts list:</Typography>
             <Button onClick={openModal}>+</Button>
             <AccountsTable accounts={accounts}/>
-            <Modal open={showModal} onClose={() => setShowModal(false)}/>
+            <Modal open={showModal} 
+            onClose={closeModal}
+            />
         </Layout>
     )
 }

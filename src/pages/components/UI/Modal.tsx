@@ -9,21 +9,13 @@ import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adap
 export default function Modal({open, onClose}: IModal) {
     const [resource, setResource] = useState('');
     const [password, setPassword] = useState('');
-    
+    const [showModal, setShowModal] = useState(false);
 
     function addAccount() {
         if(resource && password) {
             AccountService.postNewAccount({resource, password})
-            // setShowModal(false)
+            onClose()
         }
-    }
-
-    function handleResurceValue(event: any) {
-        setResource(event.target.value)   
-    }
-
-    function handlePasswordValue(event: any) {
-        setPassword(event.target.value)
     }
 
     function handleValue(event: React.ChangeEvent<HTMLInputElement>) {
@@ -51,7 +43,9 @@ export default function Modal({open, onClose}: IModal) {
                 alignItems: 'center'
 
             }}>
-                <Typography variant='h2' sx={{mb: 3}}>Add new account</Typography>
+                <Typography variant='h2' sx={{mb: 3}}>
+                    Add new account
+                </Typography>
                 <Box
                     component="form"
                     sx={{
@@ -60,14 +54,11 @@ export default function Modal({open, onClose}: IModal) {
                         flexDirection: 'column',
                         alignItems: 'center'
                     }}
-                    noValidate
-                    autoComplete="off"
                     >
                         <TextField
                             required
                             id="resource"
                             label="Resource"
-                            // onChange={handleResurceValue}
                             onChange={handleValue}
                             value={resource}
                         /> 
@@ -75,7 +66,6 @@ export default function Modal({open, onClose}: IModal) {
                             required
                             id="password"
                             label="Password"
-                            // onChange={handlePasswordValue}
                             onChange={handleValue}
                             value={password}
                         /> 

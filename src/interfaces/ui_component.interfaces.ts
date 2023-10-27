@@ -7,5 +7,5 @@ export interface ILink {
 
 export interface IModal {
     open: boolean,
-    onClose: any
+    onClose: () => void
 }
