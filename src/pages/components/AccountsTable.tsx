@@ -1,8 +1,8 @@
-import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
 import { IAccountData } from '@/interfaces/accounts.interface';
 
 export default function AccountsTable({accounts}: IAccountData) {
-      
+
     return (
         <TableContainer component={Paper} sx={{ width: 600 }}>
             <Table aria-label="simple table">
