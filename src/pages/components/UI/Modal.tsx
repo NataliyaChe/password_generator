@@ -5,33 +5,18 @@ import Button from "./Button"
 import { useState } from 'react'
 import { IModal } from "@/interfaces/ui_component.interfaces"
 import { AccountService } from "@/services/accounts.service";
-import { useRouter } from 'next/router'
-import axios from 'axios'
-
-interface INewAccount {
-    resource: string,
-    password: string
-}
 
 export default function Modal({open, onClose}: IModal) {
     const [account, setAccount] = useState({
         resource: "",
         password: ""
-      })
+    })
 
-    // const router = useRouter()
-
-    // const refreshData = () => {
-    //     router.replace(router.asPath);
-    //   }
 
     async function addAccount() {
         const {resource, password} = account
         if(resource && password) {
-        
             AccountService.postNewAccount({resource, password})
-           
-            // refreshData()
             setAccount({
                 resource: "",
                 password: ""

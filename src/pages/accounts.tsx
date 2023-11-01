@@ -8,64 +8,53 @@ import Button from "./components/UI/Button";
 import Modal from "./components/UI/Modal";
 import {useState, useEffect} from "react"
 import { IAccount } from "@/interfaces/accounts.interface";
-import { useRouter } from 'next/router'
 import axios from 'axios'
 
 export default function AccountsPage({accounts}: IAccountData) {
     const [showModal, setShowModal] = useState(false);
     const [accountsArr, setAccountsArr] = useState<IAccount[]>(accounts);
     const [refresh, setRefresh] = useState(false)
-    // const data = accounts
+    const [params, setParams] = useState('?_sort=resource&_order=asc')
     
-    useEffect(() => {
+    useEffect(() => { 
         async function fetchAccounts() {
-            const {data} = await axios.get('http://localhost:3004/accounts')
-            console.log('data', data);
+            const {data} = await axios.get(`http://localhost:3004/accounts${params}`)
             setAccountsArr(data)
           }
           fetchAccounts()
           setRefresh(false)
-    }, [refresh === true])
+    }, [refresh === true, params])
 
-    // function toggleModal() {
-    //     setShowModal(!showModal)  
-    //     refreshData()
-    // }
-
-    function closeModal() {
-        setShowModal(false)  
-        setRefresh(true)
+    function toggleModal() {
+        setShowModal(!showModal) 
+        setRefresh(!refresh) 
     }
 
-    
-    function openModal() {
-        setShowModal(true)  
+    function sortByResources() {
+        if(params === '?_sort=resource&_order=asc') {
+            setParams('?_sort=resource&_order=desc')
+        } else {
+            setParams('?_sort=resource&_order=asc')
+        }
     }
-    
 
     return (
         <Layout>
             <Typography variant="h2" sx={{mb: 2}}>Accounts list:</Typography>
-            <Button onClick={openModal}>+</Button>
-            <AccountsTable accounts={accountsArr}/>
+            <Button onClick={toggleModal}>+</Button>
+            <AccountsTable accounts={accountsArr} sortByResources={sortByResources}/>
             <Modal open={showModal} 
-            onClose={closeModal} 
+            onClose={toggleModal} 
             />
         </Layout>
     )
 }
-const params = '?_sort=resource'
+
 export const getServerSideProps: GetServerSideProps<IAccountData> = async () => {
-    const accounts = await AccountService.getAll(params)
+    const accounts = await AccountService.getAll()
     return {
         props: {accounts}
     }
 }
 
-// export async function fetchAccounts() {
-//     const res = await fetch('http://localhost:3004/accounts', { next: { tags: ['accounts'] } })
-//     const data = await res.json()
-//     console.log('data', data);
-//     return data
-//   }
 

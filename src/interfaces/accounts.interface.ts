@@ -7,3 +7,8 @@ export interface IAccount {
 export interface IAccountData {
     accounts: IAccount[]
 }
+
+export interface ITable {
+    accounts: IAccount[]
+    sortByResources: () => void
+}

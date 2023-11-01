@@ -1,7 +1,7 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
-import { IAccountData } from '@/interfaces/accounts.interface';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel} from '@mui/material';
+import { ITable } from '@/interfaces/accounts.interface';
 
-export default function AccountsTable({accounts}: IAccountData) {
+export default function AccountsTable({accounts, sortByResources}: ITable) {
 
     return (
         <TableContainer component={Paper} sx={{ width: 600 }}>
@@ -9,7 +9,11 @@ export default function AccountsTable({accounts}: IAccountData) {
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
-                        <TableCell>Account</TableCell>
+                        <TableCell>
+                            <TableSortLabel onClick={sortByResources}>
+                                Account
+                            </TableSortLabel>
+                        </TableCell>
                         <TableCell>Password</TableCell>
                     </TableRow>
                 </TableHead>

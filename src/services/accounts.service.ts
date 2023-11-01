@@ -12,8 +12,8 @@ interface INewAccount {
 }
 
 export const AccountService = {
-    async getAll(params: string) {
-        const {data} = await axios.get<IAccount[]>(`/accounts${params}`)
+    async getAll() {
+        const {data} = await axios.get<IAccount[]>('/accounts')
         return data
     },
 
@@ -22,19 +22,4 @@ export const AccountService = {
         return data
     }
 }
-
-// export async function fetchAccounts() {
-//     const {data} = await axios.get('http://localhost:3004/accounts')
-//     console.log('data', data);
-//     return data
-//   }
-
-// export async function post({resource, password}: INewAccount) {
-//     fetch('http://localhost:3004/accounts', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify( { resource, password })
-//     })
-//     revalidateTag('/accounts')
-// }
 
