@@ -15,18 +15,15 @@ export default function AccountsPage({accounts}: IAccountData) {
     const [accountsArr, setAccountsArr] = useState<IAccount[]>(accounts);
     const [refresh, setRefresh] = useState(false)
     const [sortOrder, setSortOrder] = useState('asc')
-    // const [sortOrder, setSortOrder] = useState('?_sort=resource&_order=$asc')
     
     useEffect(() => { 
         async function fetchAccounts() {
             const {data} = await axios.get('http://localhost:3004/accounts', {
                 params: {
-                    sort: 'resource',
-                    order: sortOrder
+                    _sort: 'resource',
+                    _order: sortOrder
                 }
             })
-            console.log('params', sortOrder);
-            console.log('params', data);
             setAccountsArr(data)
           }
           fetchAccounts()
