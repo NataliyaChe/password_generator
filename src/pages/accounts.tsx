@@ -14,16 +14,24 @@ export default function AccountsPage({accounts}: IAccountData) {
     const [showModal, setShowModal] = useState(false);
     const [accountsArr, setAccountsArr] = useState<IAccount[]>(accounts);
     const [refresh, setRefresh] = useState(false)
-    const [params, setParams] = useState('?_sort=resource&_order=asc')
+    const [sortOrder, setSortOrder] = useState('asc')
+    // const [sortOrder, setSortOrder] = useState('?_sort=resource&_order=$asc')
     
     useEffect(() => { 
         async function fetchAccounts() {
-            const {data} = await axios.get(`http://localhost:3004/accounts${params}`)
+            const {data} = await axios.get('http://localhost:3004/accounts', {
+                params: {
+                    sort: 'resource',
+                    order: sortOrder
+                }
+            })
+            console.log('params', sortOrder);
+            console.log('params', data);
             setAccountsArr(data)
           }
           fetchAccounts()
           setRefresh(false)
-    }, [refresh === true, params])
+    }, [refresh === true, sortOrder])
 
     function toggleModal() {
         setShowModal(!showModal) 
@@ -31,10 +39,10 @@ export default function AccountsPage({accounts}: IAccountData) {
     }
 
     function sortByResources() {
-        if(params === '?_sort=resource&_order=asc') {
-            setParams('?_sort=resource&_order=desc')
+        if(sortOrder === 'asc') {
+            setSortOrder('desc')
         } else {
-            setParams('?_sort=resource&_order=asc')
+            setSortOrder('asc')
         }
     }
 
