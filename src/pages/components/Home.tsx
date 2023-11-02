@@ -1,7 +1,8 @@
 import Head from "next/head"
 // import styles from '@/styles/Home.module.css'
 import { Inter } from 'next/font/google'
-import Layout from "../layout/Layout"
+import Layout from "./layout/Layout"
+import PasswordGeneratorForm from "./PasswordGeneratorForm"
 
 export default function Home() {
     return <Layout>
@@ -11,7 +12,7 @@ export default function Home() {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
     <main >
-      <h2>Generate password:</h2>
+      <PasswordGeneratorForm />
     </main>
   </Layout>
 }
