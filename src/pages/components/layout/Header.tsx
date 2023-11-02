@@ -1,12 +1,10 @@
-// import Link from "next/link";
 import styles from '@/styles/Header.module.css'
 import { useRouter } from "next/router"
-import {Button, Box, Typography} from '@mui/material';
+import { Box, Typography} from '@mui/material';
 import Link from "../UI/Link";
 
 export default function Header() {
     const {pathname} = useRouter()
-    console.log('pathname', pathname);
     
     return (
         <Box sx={{
@@ -17,7 +15,7 @@ export default function Header() {
             flexDirection: 'column',
             gap: 2,
             alignItems: 'center',
-            color: 'text.secondary'
+            color: 'secondary.main'
         }}>
             <Typography variant="h1">Generate Your Password!</Typography>
             <div className={styles.nav}>
