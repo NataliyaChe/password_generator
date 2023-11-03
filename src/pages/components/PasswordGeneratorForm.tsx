@@ -1,60 +1,56 @@
 import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField} from "@mui/material"
-import Button from "./UI/Button";
+import Button from "./UI/Button"
+import { useState } from 'react'
 
 export default function PasswordGeneratorForm() {
-    const marks = [
+    const marksValue = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    const marks = marksValue.map(markItem => ({value: markItem, label: markItem}))
+    const [passwordLength, setPasswordLength] = useState(6)
+    const [buttonCondition, setButtonCondition] = useState(true)
+    
+    const options = [
         {
-            value: 4,
-            label: '4',
+            id: '1',
+            label: "Allow English upper case letters",
+            value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            checked: false
         },
         {
-            value: 5,
-            label: '5',
+            id: '2',
+            label: "Allow English lower case letters",
+            value: "abcdefghijklmnopqrstuvwxyz",
+            checked: false
         },
         {
-            value: 6,
-            label: '6',
+            id: '3',
+            label: "Allow numbers",
+            value: "0123456789",
+            checked: false
         },
         {
-            value: 7,
-            label: '7',
-        },
-        {
-            value: 8,
-            label: '8',
-        },
-        {
-            value: 9,
-            label: '9',
-        },
-        {
-            value: 10,
-            label: '10',
-        },
-        {
-            value: 11,
-            label: '11',
-        },
-        {
-            value: 12,
-            label: '12',
-        },
-        {
-            value: 13,
-            label: '13',
-        },
-        {
-            value: 14,
-            label: '14',
-        },
-        {
-            value: 15,
-            label: '15',
+            id: '4',
+            label: "Allow special symbols (* $ # ! ? %)",
+            value: "*$#!?%",
+            checked: false
         },
     ]
+        
+    function handleSlider(event: Event, newValue: number | number[]) {
+        setPasswordLength(newValue as number)    
+    }
+
     function generatePassword() {
         console.log('click');
         
+    }
+
+    function handleCheckbox(event: React.BaseSyntheticEvent) {
+        setButtonCondition(!event.target.checked)
+        options.forEach(item => {
+            if(item.id === event.target.id) {
+                item.checked = event.target.checked
+            }
+        })
     }
 
     return (
@@ -77,8 +73,8 @@ export default function PasswordGeneratorForm() {
                 </Typography>
                 <Slider
                     aria-label="Password length"
-                    defaultValue={6}
-                    // getAriaValueText={valuetext}
+                    value={passwordLength} 
+                    onChange={handleSlider}
                     step={1}
                     marks={marks}
                     min={4}
@@ -86,24 +82,20 @@ export default function PasswordGeneratorForm() {
                     sx={{mb: 5}}
                 />
                 <FormGroup sx={{mb: 3}}>
-                    <FormControlLabel 
-                        control={<Checkbox />} 
-                        label="Allow English upper case letters" 
+                    {options.map(item => 
+                        <FormControlLabel 
+                        key={item.id}
+                        control={
+                            <Checkbox 
+                                id={item.id}
+                                onChange={handleCheckbox}
+                            />} 
+                        label={item.label}
                     />
-                    <FormControlLabel
-                        control={<Checkbox />} 
-                        label="Allow English lower case letters" 
-                    />
-                    <FormControlLabel 
-                        control={<Checkbox />} 
-                        label="Allow numbers" 
-                    />
-                    <FormControlLabel 
-                        control={<Checkbox />} 
-                        label="Allow special symbols (* $ # ! ? %)" 
-                    />
+                        )}
                 </FormGroup>
-                <Button onClick={generatePassword}>Generate</Button>
+                <Button onClick={generatePassword}
+                disabled={buttonCondition}>Generate</Button>
             </Box>
             <Typography variant="body1" sx={{mt: 2, mb: 1}}>
                 Result:
