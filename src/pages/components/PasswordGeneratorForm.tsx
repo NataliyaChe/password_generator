@@ -7,7 +7,6 @@ export default function PasswordGeneratorForm() {
     const marks = marksValue.map(markItem => ({value: markItem, label: markItem}))
     const [passwordLength, setPasswordLength] = useState(6)
     const [buttonCondition, setButtonCondition] = useState(true)
-    const [checkboxIndex, setCheckboxIndex] = useState(0)
     
     const options = [
         {
@@ -35,10 +34,6 @@ export default function PasswordGeneratorForm() {
             checked: false
         },
     ]
-       
-    const [checkedState, setCheckedState] = useState(
-        new Array(options.length).fill(false)
-    )
 
     function handleSlider(event: Event, newValue: number | number[]) {
         setPasswordLength(newValue as number)    
@@ -54,23 +49,13 @@ export default function PasswordGeneratorForm() {
     }
 
     function handleCheckbox(event: React.BaseSyntheticEvent) {
-        setCheckboxIndex(Number(event.target.id) - 1)
         options.forEach(item => {
             if(item.id === event.target.id) {
                 item.checked = event.target.checked
             }
         })
-        const updateCheckedState = checkedState.map((item, index) => {
-            if(index === (Number(event.target.id) - 1)) {
-                console.log('if', !item);
-                !item
-            } else {
-                console.log('else', item);
-                item
-            }
-        })
-        console.log('updateCheckedState', updateCheckedState);
-        
+        const isChecked = options.find(item => item.checked === true)
+        isChecked ? setButtonCondition(false) : setButtonCondition(true)
     }
 
     return (
