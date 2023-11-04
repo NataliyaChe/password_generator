@@ -1,19 +1,15 @@
 import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField} from "@mui/material"
 import Button from "./UI/Button"
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 
 export default function PasswordGeneratorForm() {
     const marksValue = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    const marks = marksValue.map(markItem => ({value: markItem, label: markItem}))
+    const marks = useMemo(
+        () => marksValue.map(markItem => ({value: markItem, label: markItem})),
+        [marksValue]
+    )
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
-    const [checkedState, setCheckedState] = useState({
-        upperCase: false,
-        lowerCase: false,
-        numbers: false,
-        symbols: false
-    })
-    
     const [options, setOptions] = useState([
         {
             id: '1',
@@ -50,7 +46,6 @@ export default function PasswordGeneratorForm() {
     }
 
     function generatePassword() {
-        console.log('click');
         options.forEach(item => {
             if(item.checked) {
                 item.value
@@ -63,7 +58,7 @@ export default function PasswordGeneratorForm() {
             item.name === event.target.name ? {...item, checked: event.target.checked} : item
         )
         setOptions(newOptions)
-        const isChecked = newOptions.map(item => item.checked).find(item => true)
+        const isChecked = newOptions.find(item => item.checked)
         setDisable(isChecked ? false : true)
     }
 
@@ -104,7 +99,6 @@ export default function PasswordGeneratorForm() {
                                 id={id}
                                 name={name}
                                 onChange={handleCheckbox}
-                                // checked={name}
                             />} 
                         label={label}
                     />
