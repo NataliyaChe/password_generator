@@ -6,34 +6,44 @@ export default function PasswordGeneratorForm() {
     const marksValue = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     const marks = marksValue.map(markItem => ({value: markItem, label: markItem}))
     const [passwordLength, setPasswordLength] = useState(6)
-    const [buttonCondition, setButtonCondition] = useState(true)
+    const [disable, setDisable] = useState(true)
+    const [checkedState, setCheckedState] = useState({
+        upperCase: false,
+        lowerCase: false,
+        numbers: false,
+        symbols: false
+    })
     
-    const options = [
+    const [options, setOptions] = useState([
         {
             id: '1',
+            name: 'upperCase',
             label: "Allow English upper case letters",
             value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             checked: false
         },
         {
             id: '2',
+            name: 'lowerCase',
             label: "Allow English lower case letters",
             value: "abcdefghijklmnopqrstuvwxyz",
             checked: false
         },
         {
             id: '3',
+            name: 'numbers',
             label: "Allow numbers",
             value: "0123456789",
             checked: false
         },
         {
             id: '4',
+            name: 'symbols',
             label: "Allow special symbols (* $ # ! ? %)",
             value: "*$#!?%",
             checked: false
         },
-    ]
+    ])
 
     function handleSlider(event: Event, newValue: number | number[]) {
         setPasswordLength(newValue as number)    
@@ -49,13 +59,12 @@ export default function PasswordGeneratorForm() {
     }
 
     function handleCheckbox(event: React.BaseSyntheticEvent) {
-        options.forEach(item => {
-            if(item.id === event.target.id) {
-                item.checked = event.target.checked
-            }
-        })
-        const isChecked = options.find(item => item.checked === true)
-        isChecked ? setButtonCondition(false) : setButtonCondition(true)
+        const newOptions = options.map(item => 
+            item.name === event.target.name ? {...item, checked: event.target.checked} : item
+        )
+        setOptions(newOptions)
+        const isChecked = newOptions.map(item => item.checked).find(item => true)
+        setDisable(isChecked ? false : true)
     }
 
     return (
@@ -87,20 +96,22 @@ export default function PasswordGeneratorForm() {
                     sx={{mb: 5}}
                 />
                 <FormGroup sx={{mb: 3}}>
-                    {options.map(({id, label}) => 
+                    {options.map(({id, label, name}) => 
                         <FormControlLabel 
                         key={id}
                         control={
                             <Checkbox 
                                 id={id}
+                                name={name}
                                 onChange={handleCheckbox}
+                                // checked={name}
                             />} 
                         label={label}
                     />
                         )}
                 </FormGroup>
                 <Button onClick={generatePassword}
-                disabled={buttonCondition}>Generate</Button>
+                disabled={disable}>Generate</Button>
             </Box>
             <Typography variant="body1" sx={{mt: 2, mb: 1}}>
                 Result:
