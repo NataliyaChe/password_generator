@@ -10,6 +10,7 @@ export default function PasswordGeneratorForm() {
     )
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
+    const [password, setPassword] = useState('')
     const [options, setOptions] = useState([
         {
             id: '1',
@@ -46,11 +47,23 @@ export default function PasswordGeneratorForm() {
     }
 
     function generatePassword() {
+        let chars = ''
+        let randomString = ''
         options.forEach(item => {
             if(item.checked) {
-                item.value
-            }
+                chars += item.value
+            }    
         })
+        // const res = options.reduce((sum, item) => {
+        //     if(item.checked) {
+        //         sum + item.value
+        //     } 
+        // })
+        for (let i = 0; i < passwordLength; i++) {
+            const randomNumber = Math.floor(Math.random() * chars.length)
+            randomString += chars.substring(randomNumber, randomNumber +1)
+        }
+        setPassword(randomString)   
     }
 
     function handleCheckbox(event: React.BaseSyntheticEvent) {
@@ -112,7 +125,7 @@ export default function PasswordGeneratorForm() {
             </Typography>
             <TextField
                 name="password"
-                // value={}
+                value={password}
             /> 
         </Box>
     )
