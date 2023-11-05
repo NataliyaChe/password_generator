@@ -1,6 +1,7 @@
-import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField} from "@mui/material"
+import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField, IconButton, InputAdornment} from "@mui/material"
 import Button from "./UI/Button"
 import { useState, useMemo } from 'react'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function PasswordGeneratorForm() {
     const marksValue = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
@@ -70,6 +71,10 @@ export default function PasswordGeneratorForm() {
         setDisable(isChecked ? false : true)
     }
 
+    function copyPassword() {
+        navigator.clipboard.writeText(password)
+    }
+
     return (
         <Box 
         sx={{width: 500}}
@@ -121,7 +126,14 @@ export default function PasswordGeneratorForm() {
             <TextField
                 name="password"
                 value={password}
-            /> 
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <ContentCopyIcon color="primary" onClick={copyPassword}/>
+                        </InputAdornment>
+                    ),
+                }}
+            />
         </Box>
     )
 }
