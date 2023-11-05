@@ -54,11 +54,6 @@ export default function PasswordGeneratorForm() {
                 chars += item.value
             }    
         })
-        // const res = options.reduce((sum, item) => {
-        //     if(item.checked) {
-        //         sum + item.value
-        //     } 
-        // })
         for (let i = 0; i < passwordLength; i++) {
             const randomNumber = Math.floor(Math.random() * chars.length)
             randomString += chars.substring(randomNumber, randomNumber +1)
