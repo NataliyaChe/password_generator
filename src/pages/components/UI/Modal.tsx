@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { IModal } from "@/interfaces/ui_component.interfaces"
 import { AccountService } from "@/services/accounts.service";
 
-export default function Modal({open, onClose}: IModal) {
+export default function Modal({open, onClose, makeRefresh}: IModal) {
     const [account, setAccount] = useState({
         resource: "",
         password: ""
@@ -21,6 +21,7 @@ export default function Modal({open, onClose}: IModal) {
                 resource: "",
                 password: ""
             });
+            makeRefresh()
             onClose()
         }
     }

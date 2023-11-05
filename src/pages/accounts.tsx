@@ -31,8 +31,11 @@ export default function AccountsPage({accounts}: IAccountData) {
     }, [refresh === true, sortOrder])
 
     function toggleModal() {
-        setShowModal(!showModal) 
-        setRefresh(!refresh) 
+        setShowModal(!showModal)  
+    }
+
+    function makeRefresh() {
+        setRefresh(!refresh)
     }
 
     function sortByResources() {
@@ -50,6 +53,7 @@ export default function AccountsPage({accounts}: IAccountData) {
             <AccountsTable accounts={accountsArr} sortByResources={sortByResources}/>
             <Modal open={showModal} 
             onClose={toggleModal} 
+            makeRefresh={makeRefresh}
             />
         </Layout>
     )
