@@ -4,12 +4,8 @@ import { useState, useMemo } from 'react'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function PasswordGeneratorForm() {
-    const marksValue = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    const marks = useMemo(
-        () => marksValue.map(markItem => ({value: markItem, label: markItem})),
-        []
-    )
-    
+    const marks = Array.from({length: 12}, (value, index) => ({value: index + 4, label: index + 4}))
+    console.log('newMarks', marks)
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
     const [password, setPassword] = useState('')
