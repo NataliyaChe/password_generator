@@ -1,5 +1,5 @@
 import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField, InputAdornment} from "@mui/material"
-import Button from "./UI/Button"
+import Button from "./Button"
 import { useState, useMemo } from 'react'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 

@@ -1,11 +1,11 @@
-import Layout from "./components/layout/Layout"
+import Layout from "../components/layout/Layout"
 import { Typography} from '@mui/material'
-import AccountsTable from "./components/AccountsTable"
+import AccountsTable from "../components/AccountsTable"
 import { GetServerSideProps } from 'next';
 import { IAccountData } from "@/interfaces/accounts.interface";
 import { useApi } from "@/hooks/useApi";
-import Button from "./components/UI/Button";
-import Modal from "./components/UI/Modal";
+import Button from "../components/Button";
+import Modal from "../components/Modal";
 import {useState, useEffect} from "react"
 import { IAccount } from "@/interfaces/accounts.interface";
 import axios from 'axios'

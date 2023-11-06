@@ -1,7 +1,7 @@
 import styles from '@/styles/Header.module.css'
 import { useRouter } from "next/router"
 import { Box, Typography} from '@mui/material';
-import Link from "../UI/Link";
+import Link from "../Link";
 
 export default function Header() {
     const {pathname} = useRouter()
