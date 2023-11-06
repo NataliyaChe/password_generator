@@ -1,4 +1,4 @@
-import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField, IconButton, InputAdornment} from "@mui/material"
+import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField, InputAdornment} from "@mui/material"
 import Button from "./UI/Button"
 import { useState, useMemo } from 'react'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -12,6 +12,7 @@ export default function PasswordGeneratorForm() {
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
     const [password, setPassword] = useState('')
+
     const [options, setOptions] = useState([
         {
             id: '1',

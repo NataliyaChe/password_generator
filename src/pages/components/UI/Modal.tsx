@@ -12,7 +12,6 @@ export default function Modal({open, onClose, makeRefresh}: IModal) {
         password: ""
     })
 
-
     async function addAccount() {
         const {resource, password} = account
         if(resource && password) {
@@ -53,7 +52,6 @@ export default function Modal({open, onClose, makeRefresh}: IModal) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center'
-
             }}>
                 <Typography variant='h2' sx={{mb: 3}}>
                     Add new account
