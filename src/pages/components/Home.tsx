@@ -1,6 +1,4 @@
 import Head from "next/head"
-// import styles from '@/styles/Home.module.css'
-import { Inter } from 'next/font/google'
 import Layout from "./layout/Layout"
 import PasswordGeneratorForm from "./PasswordGeneratorForm"
 

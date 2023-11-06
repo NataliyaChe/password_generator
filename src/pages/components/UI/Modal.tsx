@@ -4,7 +4,7 @@ import MuiModal from "@mui/material/Modal"
 import Button from "./Button"
 import { useState } from 'react'
 import { IModal } from "@/interfaces/ui_component.interfaces"
-import { AccountService } from "@/services/accounts.service";
+import { useApi } from "@/hooks/useApi";
 
 export default function Modal({open, onClose, makeRefresh}: IModal) {
     const [account, setAccount] = useState({
@@ -15,7 +15,7 @@ export default function Modal({open, onClose, makeRefresh}: IModal) {
     async function addAccount() {
         const {resource, password} = account
         if(resource && password) {
-            AccountService.postNewAccount({resource, password})
+            useApi.postNewAccount({resource, password})
             setAccount({
                 resource: "",
                 password: ""

@@ -3,7 +3,7 @@ import { Typography} from '@mui/material'
 import AccountsTable from "./components/AccountsTable"
 import { GetServerSideProps } from 'next';
 import { IAccountData } from "@/interfaces/accounts.interface";
-import { AccountService } from "@/services/accounts.service";
+import { useApi } from "@/hooks/useApi";
 import Button from "./components/UI/Button";
 import Modal from "./components/UI/Modal";
 import {useState, useEffect} from "react"
@@ -60,7 +60,7 @@ export default function AccountsPage({accounts}: IAccountData) {
 }
 
 export const getServerSideProps: GetServerSideProps<IAccountData> = async () => {
-    const accounts = await AccountService.getAll()
+    const accounts = await useApi.getAll()
     return {
         props: {accounts}
     }

@@ -1,5 +1,3 @@
-
-
 import axios from "axios"
 import { IAccount } from "@/interfaces/accounts.interface"
 
@@ -11,7 +9,7 @@ interface INewAccount {
     password: string
 }
 
-export const AccountService = {
+export const useApi = {
     async getAll() {
         const {data} = await axios.get<IAccount[]>('/accounts')
         return data

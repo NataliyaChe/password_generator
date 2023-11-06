@@ -1,13 +1,6 @@
 
 import MuiButton from '@mui/material/Button'
-
-interface IButton {
-    // variant: string,
-    children: string,
-    // color: string,
-    disabled?: boolean,
-    onClick: any
-}
+import { IButton } from '@/interfaces/ui_component.interfaces'
 
 export default function Button({ children, disabled, onClick}: IButton) {
     return (
