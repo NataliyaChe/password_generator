@@ -7,8 +7,9 @@ export default function PasswordGeneratorForm() {
     const marksValue = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     const marks = useMemo(
         () => marksValue.map(markItem => ({value: markItem, label: markItem})),
-        [marksValue]
+        []
     )
+    
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
     const [password, setPassword] = useState('')
@@ -49,16 +50,11 @@ export default function PasswordGeneratorForm() {
     }
 
     function generatePassword() {
-        let chars = ''
         let randomString = ''
-        options.forEach(item => {
-            if(item.checked) {
-                chars += item.value
-            }    
-        })
+        const chars = options.reduce((sum, current) => current.checked ? sum + current.value : sum, '')   
         for (let i = 0; i < passwordLength; i++) {
             const randomNumber = Math.floor(Math.random() * chars.length)
-            randomString += chars.substring(randomNumber, randomNumber +1)
+            randomString += chars[randomNumber]
         }
         setPassword(randomString)   
     }
