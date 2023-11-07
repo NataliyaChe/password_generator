@@ -66,7 +66,7 @@ export default function PasswordGeneratorForm() {
         const regex = new RegExp(regexString)
         for (let i = 0; i < passwordLength; i++) {
             const randomNumber = Math.floor(Math.random() * chars.length)
-            randomString += chars.substring(randomNumber, randomNumber +1)
+            randomString += chars[randomNumber]
         }
         if(regex.test(randomString)) {
             setPassword(randomString) 
