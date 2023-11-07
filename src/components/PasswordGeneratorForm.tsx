@@ -4,7 +4,8 @@ import { useState } from 'react'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function PasswordGeneratorForm() {
-    const marks = Array.from({length: 12}, (value, index) => ({value: index + 4, label: index + 4}))
+    const marks = Array.from({length: 12}, (value, index) => (
+        {value: index + 4, label: index + 4}))
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
     const [password, setPassword] = useState('')
@@ -64,13 +65,14 @@ export default function PasswordGeneratorForm() {
             }    
         })
         const regex = new RegExp(regexString)
-        for (let i = 0; i < passwordLength; i++) {
-            const randomNumber = Math.floor(Math.random() * chars.length)
-            randomString += chars[randomNumber]
-        }
-        if(regex.test(randomString)) {
-            setPassword(randomString) 
-        } 
+        do {
+            for (let i = 0; i < passwordLength; i++) {
+                const randomNumber = Math.floor(Math.random() * chars.length)
+                randomString += chars[randomNumber]
+            }
+            randomString.length > passwordLength ? randomString = '' : randomString
+        } while (!regex.test(randomString))
+        setPassword(randomString) 
     }
 
     function copyPassword() {
