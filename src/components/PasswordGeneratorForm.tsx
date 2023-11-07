@@ -1,11 +1,10 @@
 import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField, InputAdornment} from "@mui/material"
 import Button from "./Button"
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function PasswordGeneratorForm() {
     const marks = Array.from({length: 12}, (value, index) => ({value: index + 4, label: index + 4}))
-    console.log('newMarks', marks)
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
     const [password, setPassword] = useState('')
@@ -45,16 +44,6 @@ export default function PasswordGeneratorForm() {
         setPasswordLength(newValue as number)    
     }
 
-    function generatePassword() {
-        let randomString = ''
-        const chars = options.reduce((sum, current) => current.checked ? sum + current.value : sum, '')   
-        for (let i = 0; i < passwordLength; i++) {
-            const randomNumber = Math.floor(Math.random() * chars.length)
-            randomString += chars[randomNumber]
-        }
-        setPassword(randomString)   
-    }
-
     function handleCheckbox(event: React.BaseSyntheticEvent) {
         const newOptions = options.map(item => 
             item.name === event.target.name ? {...item, checked: event.target.checked} : item
@@ -62,6 +51,26 @@ export default function PasswordGeneratorForm() {
         setOptions(newOptions)
         const isChecked = newOptions.find(item => item.checked)
         setDisable(isChecked ? false : true)
+    }
+
+    function generatePassword() {
+        let chars = ''
+        let randomString = ''
+        let regexString = ''
+        options.forEach(item => {
+            if(item.checked) {
+                chars += item.value
+                regexString += `(?=.*[${item.value}])`
+            }    
+        })
+        const regex = new RegExp(regexString)
+        for (let i = 0; i < passwordLength; i++) {
+            const randomNumber = Math.floor(Math.random() * chars.length)
+            randomString += chars.substring(randomNumber, randomNumber +1)
+        }
+        if(regex.test(randomString)) {
+            setPassword(randomString) 
+        } 
     }
 
     function copyPassword() {

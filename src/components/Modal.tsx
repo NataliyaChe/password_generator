@@ -4,7 +4,7 @@ import MuiModal from "@mui/material/Modal"
 import Button from "./Button"
 import { useState } from 'react'
 import { IModal } from "@/interfaces/ui_component.interfaces"
-import { useApi } from "@/hooks/useApi";
+import { useApi } from "@/utils/useApi";
 
 export default function Modal({open, onClose, makeRefresh}: IModal) {
     const [account, setAccount] = useState({

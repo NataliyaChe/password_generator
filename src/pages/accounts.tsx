@@ -3,7 +3,7 @@ import { Typography} from '@mui/material'
 import AccountsTable from "../components/AccountsTable"
 import { GetServerSideProps } from 'next';
 import { IAccountData } from "@/interfaces/accounts.interface";
-import { useApi } from "@/hooks/useApi";
+import { useApi } from "@/utils/useApi";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import {useState, useEffect} from "react"
