@@ -55,23 +55,17 @@ export default function PasswordGeneratorForm() {
     }
 
     function generatePassword() {
-        // const chars = options.reduce((sum, current) => {
-        //     if (current.checked) {
-        //         sum + current.value
-        //     } else {
-        //         sum
-        //     }}, ''
-        //     )
-        let chars = ''
         let randomString = ''
-        let regexString = ''
-        options.forEach(item => {
-            if(item.checked) {
-                chars += item.value
-                regexString += `(?=.*[${item.value}])`
-            }    
-        })
-        const regex = new RegExp(regexString)
+        const {chars, reg} = options.reduce((acc, current) => {
+            if(current.checked) {
+                acc.chars += current.value
+                acc.reg += `(?=.*[${current.value}])`
+            } 
+            return acc
+        }, {chars: '', reg: ''})
+
+        const regex = new RegExp(reg)
+        
         do {
             for (let i = 0; i < passwordLength; i++) {
                 const randomNumber = Math.floor(Math.random() * chars.length)
