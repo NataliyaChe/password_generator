@@ -1,15 +1,15 @@
 import { Box, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField, InputAdornment} from "@mui/material"
 import Button from "./Button"
 import { useState } from 'react'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+
+const marks = Array.from({length: 12}, (value, index) => (
+    {value: index + 4, label: index + 4}))
 
 export default function PasswordGeneratorForm() {
-    const marks = Array.from({length: 12}, (value, index) => (
-        {value: index + 4, label: index + 4}))
     const [passwordLength, setPasswordLength] = useState(6)
     const [disable, setDisable] = useState(true)
     const [password, setPassword] = useState('')
-
     const [options, setOptions] = useState([
         {
             id: '1',
@@ -55,6 +55,13 @@ export default function PasswordGeneratorForm() {
     }
 
     function generatePassword() {
+        // const chars = options.reduce((sum, current) => {
+        //     if (current.checked) {
+        //         sum + current.value
+        //     } else {
+        //         sum
+        //     }}, ''
+        //     )
         let chars = ''
         let randomString = ''
         let regexString = ''
